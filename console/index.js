@@ -1,14 +1,15 @@
-const http = require('http');
-
-const hostname = '127.0.0.1';
-const port = 3000;
-
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
+const readline = require("readline");
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+rl.question("Ready for input > ", function(input) {
+  console.log(`Got some input: ${input}`);
+  rl.close();
+});
+
+rl.on("close", function() {
+    console.log("\nEnd");
+    process.exit(0);
 });
