@@ -1,14 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/css/global.css">
 </head>
+
 <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    <header>
+        <h1>Music for Serial Ports</h1>
+    </header>
+    <div class="main">
+        <div class="row">
+            <div class="column left">
+                <label>Seed</label>
+                <textarea id ="txtSeed"></textarea>
+                <button class="control" id="btnRender">Render</button>
+            </div>
+            <div class="column right">
+                <label>Output</label>
+                <textarea class="output"></textarea>
+            </div>
+        </div>
+    </div>
+    <script>
+        require('./assets/global')
+    </script>
 </body>
+
 </html>
