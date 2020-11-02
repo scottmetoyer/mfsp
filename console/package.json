@@ -8,5 +8,9 @@
     "start": "node index.js"
   },
   "author": "Scott Metoyer",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "jsmidgen": "^0.1.5",
+    "tonal": "^2.2.2"
+  }
 }
