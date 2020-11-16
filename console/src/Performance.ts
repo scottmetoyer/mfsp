@@ -28,13 +28,16 @@ export class Performance {
   }
 
   Process() {
+    // Set the performance BPM
     this.bpm = Util.map(this.GetSeedValue(1, 2), 0, 99, 63, 130);
 
+    // Set the performance note pool
     let scaleIndex = this.GetSeedValue(3, 1);
     let rootIndex = this.GetSeedValue(4, 1);
     this.scaleName = Util.getScaleName(rootIndex, scaleIndex);
     this.notePool = Scale.get(this.scaleName).notes;
 
+    // Create performance note clips
     /*
     // Create a clip for each digit in the seed. For a UPC code this will result in 12 clips
     for (var digitIndex = 0; digitIndex < seed.length; digitIndex++) {
@@ -49,7 +52,11 @@ export class Performance {
       }
     }
 
-    // Create CC clips
+    // Create performance CC clips
+
+    // Arrange clips into a performance
+
+    // Render the song to disk
     */
   }
 
