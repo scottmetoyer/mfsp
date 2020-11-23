@@ -1,6 +1,6 @@
 export class Util {
   static map (value: number, in_min: number, in_max: number, out_min:number, out_max:number) : number {
-    return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    return Math.trunc( (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min );
   }
 
   static getScaleName(rootIndex: number, scaleIndex: number) {

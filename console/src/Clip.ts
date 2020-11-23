@@ -13,6 +13,7 @@ export class Event {
 
 export class Clip {
   events: Event[];
+  tickLength: number;
 
   constructor() {
     this.events = [];

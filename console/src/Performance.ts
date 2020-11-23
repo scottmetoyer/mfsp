@@ -1,10 +1,13 @@
 import { Clip, Event, ClipType } from "./Clip";
 import { Util } from "./Util";
-import { Note, Interval, Scale } from "@tonaljs/tonal";
+import { transpose, Scale } from "@tonaljs/tonal";
 import { throws } from "assert";
 import { runInThisContext } from "vm";
 
 var Midi = require('jsmidgen');
+var fs = require('fs');
+
+const tickPerBeats = 128;
 
 export class Performance {
   name: string;
@@ -22,26 +25,106 @@ export class Performance {
     // Sanity check to make sure we have a long enough seed to work with
     if (this.seed.length >= 8) {
       this.Process();
-      this.PrintPerformance();
     } else {
       console.log("Seed is too small. Try something else.")
     }
   }
 
   Process() {
-    // Set the performance BPM
+    // Set the performance BPM and other temporal variables
     this.bpm = Util.map(this.GetSeedValue(1, 2), 0, 99, 63, 130);
 
     // Set the performance note pool
     let scaleIndex = this.GetSeedValue(3, 1);
     let rootIndex = this.GetSeedValue(4, 1);
     this.scaleName = Util.getScaleName(rootIndex, scaleIndex);
-    this.notePool = Scale.get(this.scaleName).notes;
+    var notes = Scale.get(this.scaleName).notes;
 
-    // Add a rest to the note pool
-    this.notePool.push("");
+    for (var i = 3; i <= 5; i++) {
+      for (var j = 0; j < notes.length; j++) {
+        this.notePool.push(notes[j] + i);
+      }
+    }
 
-    // Create performance note clips. Create a clip for each digit in the seed. For a UPC code this will result in 12 clips
+    // Create a note clip and a CC clip for each digit in the seed. For a UPC code this will result in 12 clips
+    this.CreateNoteClips();
+    // this.CreateControlChangeClips();
+
+    this.PrintPerformance();
+    console.log("Creating MIDI file...");
+
+    // Arrange clips into a song
+    var file = this.CreateSong();
+
+    // Render the song to disk
+    fs.writeFileSync('test.mid', file.toBytes(), 'binary');
+  }
+
+  CreateSong() : any {
+    var file = new Midi.File();
+
+   for (var seedIndex = 0; seedIndex < this.seed.length; seedIndex++) {
+      var track = this.CreateTrack(seedIndex);
+      file.addTrack(track);
+    }
+
+    // There are 1-4 percussion tracks
+
+    return file;
+  }
+
+  CreateTrack(startSeedIndex: number) : any {
+    var track = new Midi.Track();
+    var startTimeOffset = 0;
+    var midiTrackNumber = startSeedIndex % 16;
+    var currentSeedIndex = startSeedIndex;
+
+    // First track gets tempo and starts at offset 0. Other track start offsets are calculated from the seed.
+    if (startSeedIndex == 0) {
+      track.setTempo(this.bpm);
+    } else {
+      startTimeOffset = this.GetSeedValue(currentSeedIndex, 1) * 32 * tickPerBeats;
+    }
+
+    console.log("Creating MIDI track " + midiTrackNumber + " starting at tick " + startTimeOffset);
+
+    // Select the number of clips in this track (1 to 4)
+    currentSeedIndex++;
+    var numberOfClips = Util.map(this.GetSeedValue(currentSeedIndex, 1), 0, 9, 1, 4);
+
+    console.log("Track constructed from " + numberOfClips + " clips");
+
+    for (var i = 0; i < numberOfClips; i++) {
+      currentSeedIndex++;
+      var clipIndex = Util.map(this.GetSeedValue(currentSeedIndex, 1), 0, 9, 0, this.clips.length - 1);
+      var clip = this.clips[clipIndex];
+
+      currentSeedIndex++;
+      var numberOfLoops = this.GetSeedValue(currentSeedIndex, 1);
+
+      console.log("Looping clip " + i + " " + numberOfLoops + " times");
+      console.log("Clip has " + clip.events.length + " notes");
+
+      // Write the clip to the track the specified number of loops
+      for (var j = 0; j < numberOfLoops; j++) {
+        for (var k = 0; k < clip.events.length; k++) {
+          track.addNote(midiTrackNumber, clip.events[k].value, clip.events[k].duration, startTimeOffset);
+
+          if (startTimeOffset != 0) {
+            startTimeOffset = 0;
+          }
+        }
+      }
+    }
+
+    return track;
+  }
+
+  CreateControlChangeClips() {
+  }
+
+  CreateNoteClips() {
+    // Create one clip per digit in the seed
     for (var digitIndex = 0; digitIndex < this.seed.length; digitIndex++) {
       var digit  = parseInt(this.seed[digitIndex]);
       var clip = new Clip();
@@ -50,14 +133,11 @@ export class Performance {
       for (var noteCount = 0; noteCount < digit; noteCount++) {
         var note = new Event();
         note.type = ClipType.Note;
-
-        // Seed index is calculated by multiplying by the seed digit we are currently processing. This gives a nice broad
-        // selection of values from the seed without introducing randomness.
-        let seedIndex = (noteCount + 1) * (digit + 1);
+        let seedIndex = (digitIndex + (noteCount + 1));
         let noteValue = this.GetSeedValue(seedIndex, 1);
-        let durationValue = this.GetSeedValue(seedIndex / 3, 1);
+        let durationValue = this.GetSeedValue(seedIndex + 1, 1);
         note.value = this.GetNotePoolNote(noteValue);
-        note.duration = 16 * durationValue;
+        note.duration = tickPerBeats * durationValue;
         clip.events.push(note);
       }
 
@@ -65,12 +145,6 @@ export class Performance {
         this.clips.push(clip);
       }
     }
-
-    // Create performance CC clips
-
-    // Arrange clips into a performance
-
-    // Render the song to disk
   }
 
   PrintPerformance() {
@@ -79,11 +153,13 @@ export class Performance {
     console.log("BPM:\t\t" + this.bpm);
     console.log("Scale:\t\t" + this.scaleName);
     console.log("Pool:\t\t" + this.notePool);
+
+    /*
     console.log("Clips:");
 
     for (var i = 0; i < this.clips.length; i++) {
       console.log(this.clips[i].toString());
-    }
+    }*/
   }
 
   CreateFile() : any {
