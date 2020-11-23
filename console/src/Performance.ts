@@ -102,9 +102,6 @@ export class Performance {
       currentSeedIndex++;
       var numberOfLoops = this.GetSeedValue(currentSeedIndex, 1);
 
-      console.log("Looping clip " + i + " " + numberOfLoops + " times");
-      console.log("Clip has " + clip.events.length + " notes");
-
       // Write the clip to the track the specified number of loops
       for (var j = 0; j < numberOfLoops; j++) {
         for (var k = 0; k < clip.events.length; k++) {
