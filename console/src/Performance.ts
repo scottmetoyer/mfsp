@@ -1,26 +1,27 @@
-import { Clip, Event, ClipType } from "./Clip";
+import { Clip, Event } from "./Clip";
 import { Util } from "./Util";
-import { transpose, Scale } from "@tonaljs/tonal";
+import { transpose, Scale, Note } from "@tonaljs/tonal";
 import { throws } from "assert";
 import { runInThisContext } from "vm";
 
 var Midi = require('jsmidgen');
 var fs = require('fs');
 
-const tickPerBeats = 128;
+const ticksPerBeat = 128;
 
 export class Performance {
   name: string;
   seed: string;
   bpm: number;
   scaleName: string;
-  notePool: string[]
-  clips: Clip[]
+  notePool: string[];
+  voiceClips: Clip[];
+  controlChangeClips: Clip[];
 
   constructor(seed: string) {
     this.seed = seed;
     this.notePool = [];
-    this.clips = [];
+    this.voiceClips = [];
 
     // Sanity check to make sure we have a long enough seed to work with
     if (this.seed.length >= 8) {
@@ -47,8 +48,8 @@ export class Performance {
     }
 
     // Create a note clip and a CC clip for each digit in the seed. For a UPC code this will result in 12 clips
-    this.CreateNoteClips();
-    // this.CreateControlChangeClips();
+    this.CreateVoiceClips();
+    this.CreateControlChangeClips();
 
     this.PrintPerformance();
     console.log("Creating MIDI file...");
@@ -60,20 +61,18 @@ export class Performance {
     fs.writeFileSync('test.mid', file.toBytes(), 'binary');
   }
 
-  CreateSong() : any {
+  CreateSong(): any {
     var file = new Midi.File();
 
-   for (var seedIndex = 0; seedIndex < this.seed.length; seedIndex++) {
-      var track = this.CreateTrack(seedIndex);
-      file.addTrack(track);
+    // Add the instrument tracks
+    for (var seedIndex = 0; seedIndex < this.seed.length; seedIndex++) {
+      file.addTrack(this.CreateVoiceTrack(seedIndex));
     }
-
-    // There are 1-4 percussion tracks
 
     return file;
   }
 
-  CreateTrack(startSeedIndex: number) : any {
+  CreateVoiceTrack(startSeedIndex: number): any {
     var track = new Midi.Track();
     var startTimeOffset = 0;
     var midiTrackNumber = startSeedIndex % 16;
@@ -83,7 +82,7 @@ export class Performance {
     if (startSeedIndex == 0) {
       track.setTempo(this.bpm);
     } else {
-      startTimeOffset = this.GetSeedValue(currentSeedIndex, 1) * 32 * tickPerBeats;
+      startTimeOffset = this.GetSeedValue(currentSeedIndex, 1) * 32 * ticksPerBeat;
     }
 
     console.log("Creating MIDI track " + midiTrackNumber + " starting at tick " + startTimeOffset);
@@ -97,7 +96,7 @@ export class Performance {
     for (var i = 0; i < numberOfClips; i++) {
       currentSeedIndex++;
       var clipIndex = Util.map(this.GetSeedValue(currentSeedIndex, 1), 0, 9, 0, this.clips.length - 1);
-      var clip = this.clips[clipIndex];
+      var clip = this.voiceClips[clipIndex];
 
       currentSeedIndex++;
       var numberOfLoops = this.GetSeedValue(currentSeedIndex, 1);
@@ -118,28 +117,60 @@ export class Performance {
   }
 
   CreateControlChangeClips() {
+    // Create one clip per digit in the seed
+    for (var clipIndex = 0; clipIndex < this.seed.length; clipIndex++) {
+      var clip = new Clip();
+
+      // Set a pointer to the seed index and get a waveform to loop
+      var currentIndex = clipIndex;
+      var waveform = Util.getWavetable(this.GetSeedValue(currentIndex, 1));
+      currentIndex++
+
+      var sampleEventInterval = (this.GetSeedValue(currentIndex, 2) + 1) * ticksPerBeat;
+      currentIndex++;
+
+      var amplification = (this.GetSeedValue(currentIndex, 1) / 10) + .1;
+      currentIndex++
+
+      var numberOfLoops = Util.map(this.GetSeedValue(currentIndex, 1), 0, 9, 4, 12);
+      currentIndex++;
+
+      for (var i = 0; i < numberOfLoops; i++) {
+        for (var j = 0; j < waveform.length; j++) {
+          var cc = new Event();
+          cc.value = waveform[j] * amplification;
+          cc.duration = sampleEventInterval;
+          clip.events.push(cc);
+        }
+      }
+
+    // Sum waveforms
+
+      if (clip.events.length > 0) {
+        this.controlChangeClips.push(clip);
+      }
+    }
   }
 
-  CreateNoteClips() {
+  CreateVoiceClips() {
     // Create one clip per digit in the seed
     for (var digitIndex = 0; digitIndex < this.seed.length; digitIndex++) {
-      var digit  = parseInt(this.seed[digitIndex]);
+      var digit = parseInt(this.seed[digitIndex]);
       var clip = new Clip();
 
       // Number of notes are determined by the digit value
       for (var noteCount = 0; noteCount < digit; noteCount++) {
         var note = new Event();
-        note.type = ClipType.Note;
         let seedIndex = (digitIndex + (noteCount + 1));
         let noteValue = this.GetSeedValue(seedIndex, 1);
         let durationValue = this.GetSeedValue(seedIndex + 1, 1);
         note.value = this.GetNotePoolNote(noteValue);
-        note.duration = tickPerBeats * durationValue;
+        note.duration = ticksPerBeat * durationValue;
         clip.events.push(note);
       }
 
       if (clip.events.length > 0) {
-        this.clips.push(clip);
+        this.voiceClips.push(clip);
       }
     }
   }
@@ -151,30 +182,27 @@ export class Performance {
     console.log("Scale:\t\t" + this.scaleName);
     console.log("Pool:\t\t" + this.notePool);
 
-    /*
-    console.log("Clips:");
+    console.log("Voice Clips:");
 
-    for (var i = 0; i < this.clips.length; i++) {
-      console.log(this.clips[i].toString());
-    }*/
+    for (var i = 0; i < this.voiceClips.length; i++) {
+      console.log(this.voiceClips[i].toString());
+    }
   }
 
-  CreateFile() : any {
+  CreateFile(): any {
     var file = new Midi.File();
     return file;
   }
 
-  GetNotePoolNote(index: number) : string {
-    let returnValue = '';
-
+  GetNotePoolNote(index: number): number {
     index = index % this.notePool.length;
-    returnValue = this.notePool[index];
-
+    var noteString = this.notePool[index];
+    let returnValue = Note.midi(noteString);
     return returnValue;
   }
 
-  GetSeedValue(index: number, numberOfDigits: number) : number {
-    let returnValue  = 0;
+  GetSeedValue(index: number, numberOfDigits: number): number {
+    let returnValue = 0;
 
     // Wrap around index for out of bounds requests
     index = index % this.seed.length;
