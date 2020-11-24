@@ -10,28 +10,29 @@ var fs = require('fs');
 const ticksPerBeat = 128;
 
 export class Performance {
-  name: string;
+  description: string;
   seed: string;
   bpm: number;
+  performanceLength: number;
   scaleName: string;
   notePool: string[];
   voiceClips: Clip[];
-  controlChangeClips: Clip[];
 
-  constructor(seed: string) {
+  constructor(description: string, seed: string) {
     this.seed = seed;
+    this.description = description;
     this.notePool = [];
     this.voiceClips = [];
 
     // Sanity check to make sure we have a long enough seed to work with
     if (this.seed.length >= 8) {
-      this.Process();
+      this.Initialize();
     } else {
       console.log("Seed is too small. Try something else.")
     }
   }
 
-  Process() {
+  Initialize() {
     // Set the performance BPM and other temporal variables
     this.bpm = Util.map(this.GetSeedValue(1, 2), 0, 99, 63, 130);
 
@@ -46,27 +47,23 @@ export class Performance {
         this.notePool.push(notes[j] + i);
       }
     }
-
-    // Create a note clip and a CC clip for each digit in the seed. For a UPC code this will result in 12 clips
-    this.CreateVoiceClips();
-    this.CreateControlChangeClips();
-
-    this.PrintPerformance();
-    console.log("Creating MIDI file...");
-
-    // Arrange clips into a song
-    var file = this.CreateSong();
-
-    // Render the song to disk
-    fs.writeFileSync('test.mid', file.toBytes(), 'binary');
   }
 
   CreateSong(): any {
     var file = new Midi.File();
+    this.performanceLength = 0;
+
+    // Create a note clip and a CC clip for each digit in the seed. For a UPC code this will result in 12 clips
+    this.CreateVoiceClips();
 
     // Add the instrument tracks
     for (var seedIndex = 0; seedIndex < this.seed.length; seedIndex++) {
       file.addTrack(this.CreateVoiceTrack(seedIndex));
+    }
+
+    // Add the control change tracks
+    for (var seedIndex = 0; seedIndex < this.seed.length; seedIndex++) {
+      file.addTrack(this.CreateControlChangeTrack(seedIndex));
     }
 
     return file;
@@ -75,8 +72,10 @@ export class Performance {
   CreateVoiceTrack(startSeedIndex: number): any {
     var track = new Midi.Track();
     var startTimeOffset = 0;
+    var velocitySeedIndex = 0;
     var midiTrackNumber = startSeedIndex % 16;
     var currentSeedIndex = startSeedIndex;
+    var trackLength = 0;
 
     // First track gets tempo and starts at offset 0. Other track start offsets are calculated from the seed.
     if (startSeedIndex == 0) {
@@ -95,7 +94,7 @@ export class Performance {
 
     for (var i = 0; i < numberOfClips; i++) {
       currentSeedIndex++;
-      var clipIndex = Util.map(this.GetSeedValue(currentSeedIndex, 1), 0, 9, 0, this.clips.length - 1);
+      var clipIndex = Util.map(this.GetSeedValue(currentSeedIndex, 1), 0, 9, 0, this.voiceClips.length - 1);
       var clip = this.voiceClips[clipIndex];
 
       currentSeedIndex++;
@@ -104,7 +103,10 @@ export class Performance {
       // Write the clip to the track the specified number of loops
       for (var j = 0; j < numberOfLoops; j++) {
         for (var k = 0; k < clip.events.length; k++) {
-          track.addNote(midiTrackNumber, clip.events[k].value, clip.events[k].duration, startTimeOffset);
+          // Get the velocity for this added note
+          var velocity = Util.map(this.GetSeedValue(velocitySeedIndex, 2), 0, 99, 48, 127);
+          track.addNote(midiTrackNumber, clip.events[k].value, clip.events[k].duration, startTimeOffset, velocity);
+          trackLength += startTimeOffset + clip.events[k].duration;
 
           if (startTimeOffset != 0) {
             startTimeOffset = 0;
@@ -113,43 +115,63 @@ export class Performance {
       }
     }
 
+    if (trackLength > this.performanceLength) {
+      this.performanceLength = trackLength;
+    }
+
     return track;
   }
 
-  CreateControlChangeClips() {
-    // Create one clip per digit in the seed
-    for (var clipIndex = 0; clipIndex < this.seed.length; clipIndex++) {
-      var clip = new Clip();
+  CreateControlChangeTrack(startSeedIndex: number) {
+    var track = new Midi.Track();
+    var trackLength = 0;
 
-      // Set a pointer to the seed index and get a waveform to loop
-      var currentIndex = clipIndex;
+    // Set a pointer to the seed index and get the number of waveforms to string together in this loop
+    var currentIndex = startSeedIndex;
+    var numberOfWaveforms = this.GetSeedValue(currentIndex, 1);
+    currentIndex++;
+
+    console.log("Creating control change track from " + numberOfWaveforms + " waveforms.");
+
+    var controlChangeNumber = this.GetSeedValue(currentIndex, 1);
+    currentIndex++;
+
+    for (var i = 0; i < numberOfWaveforms; i++) {
       var waveform = Util.getWavetable(this.GetSeedValue(currentIndex, 1));
       currentIndex++
 
       var sampleEventInterval = (this.GetSeedValue(currentIndex, 2) + 1) * ticksPerBeat;
       currentIndex++;
 
-      var amplification = (this.GetSeedValue(currentIndex, 1) / 10) + .1;
-      currentIndex++
-
-      var numberOfLoops = Util.map(this.GetSeedValue(currentIndex, 1), 0, 9, 4, 12);
+      var numberOfLoops = Util.map(this.GetSeedValue(currentIndex, 1), 0, 9, 2, 24);
       currentIndex++;
 
-      for (var i = 0; i < numberOfLoops; i++) {
-        for (var j = 0; j < waveform.length; j++) {
-          var cc = new Event();
-          cc.value = waveform[j] * amplification;
-          cc.duration = sampleEventInterval;
-          clip.events.push(cc);
+      var amplitude = (this.GetSeedValue(currentIndex, 1) / 10) + .1;
+      currentIndex++;
+
+      for (var j = 0; j < numberOfLoops; j++) {
+        if (trackLength > this.performanceLength) {
+          break;
+        }
+
+        for (var k = 0; k < waveform.length; k++) {
+          var cc = new Midi.MidiEvent();
+          track.addEvent(
+            new Midi.MidiEvent({
+              type: Midi.MidiEvent.CONTROLLER,
+              channel: startSeedIndex,
+              param1: controlChangeNumber,
+              param2: waveform[j] * amplitude,
+              time: sampleEventInterval,
+            })
+          );
+
+          trackLength += sampleEventInterval;
         }
       }
-
-    // Sum waveforms
-
-      if (clip.events.length > 0) {
-        this.controlChangeClips.push(clip);
-      }
     }
+
+    return track;
   }
 
   CreateVoiceClips() {
@@ -175,8 +197,8 @@ export class Performance {
     }
   }
 
-  PrintPerformance() {
-    console.log("Name:\t\t" + this.name);
+  Print() {
+    console.log("Description:\t\t" + this.description);
     console.log("Seed:\t\t" + this.seed);
     console.log("BPM:\t\t" + this.bpm);
     console.log("Scale:\t\t" + this.scaleName);
@@ -187,11 +209,8 @@ export class Performance {
     for (var i = 0; i < this.voiceClips.length; i++) {
       console.log(this.voiceClips[i].toString());
     }
-  }
 
-  CreateFile(): any {
-    var file = new Midi.File();
-    return file;
+    console.log("Performance is " + this.performanceLength + " ticks long.");
   }
 
   GetNotePoolNote(index: number): number {

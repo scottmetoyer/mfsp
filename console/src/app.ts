@@ -9,10 +9,19 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-rl.question("Ready for input > ", function(input: string) {
-  var performance = new Performance(input);
-  var file = performance.CreateFile();
-  // fs.fs.writeFileSync(performance.name + '.mid', file.toBytes(), 'binary');
+rl.question("Enter a performance description > ", function(description: string) {
+
+  rl.question("Ready for scan > ", function (scan: string) {
+    var performance = new Performance(description, scan);
+    var file = performance.CreateSong();
+
+    // Render the song to disk
+    fs.writeFileSync(description + '.mid', file.toBytes(), 'binary');
+
+    performance.Print();
+  })
+
+
   rl.close();
 });
 
