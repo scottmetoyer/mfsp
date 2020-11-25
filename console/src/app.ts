@@ -19,10 +19,8 @@ rl.question("Enter a performance description > ", function(description: string) 
     fs.writeFileSync(description + '.mid', file.toBytes(), 'binary');
 
     performance.Print();
-  })
-
-
-  rl.close();
+    rl.close();
+  });
 });
 
 rl.on("close", function() {

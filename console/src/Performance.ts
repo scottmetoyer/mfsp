@@ -5,7 +5,6 @@ import { throws } from "assert";
 import { runInThisContext } from "vm";
 
 var Midi = require('jsmidgen');
-var fs = require('fs');
 
 const ticksPerBeat = 128;
 
@@ -83,30 +82,32 @@ export class Performance {
     } else {
       startTimeOffset = this.GetSeedValue(currentSeedIndex, 1) * 32 * ticksPerBeat;
     }
-
+    currentSeedIndex++;
     console.log("Creating MIDI track " + midiTrackNumber + " starting at tick " + startTimeOffset);
 
     // Select the number of clips in this track (1 to 4)
-    currentSeedIndex++;
-    var numberOfClips = Util.map(this.GetSeedValue(currentSeedIndex, 1), 0, 9, 1, 4);
+    var numberOfClips = Util.map(this.GetSeedValue(currentSeedIndex, 1), 0, 9, 1, 6);
 
-    console.log("Track constructed from " + numberOfClips + " clips");
+    // Select the track density (modifier for the interval between notes)
+    var density = this.GetSeedValue(currentSeedIndex, 1) + 1;
+    currentSeedIndex++;
+
+    console.log("Track constructed from " + numberOfClips + " clips at density " + density);
 
     for (var i = 0; i < numberOfClips; i++) {
-      currentSeedIndex++;
       var clipIndex = Util.map(this.GetSeedValue(currentSeedIndex, 1), 0, 9, 0, this.voiceClips.length - 1);
       var clip = this.voiceClips[clipIndex];
-
       currentSeedIndex++;
-      var numberOfLoops = this.GetSeedValue(currentSeedIndex, 1);
+
+      var numberOfLoops = this.GetSeedValue(currentSeedIndex, 1) * density;
 
       // Write the clip to the track the specified number of loops
       for (var j = 0; j < numberOfLoops; j++) {
         for (var k = 0; k < clip.events.length; k++) {
           // Get the velocity for this added note
           var velocity = Util.map(this.GetSeedValue(velocitySeedIndex, 2), 0, 99, 48, 127);
-          track.addNote(midiTrackNumber, clip.events[k].value, clip.events[k].duration, startTimeOffset, velocity);
-          trackLength += startTimeOffset + clip.events[k].duration;
+          track.addNote(midiTrackNumber, clip.events[k].value, clip.events[k].duration / density, startTimeOffset, velocity);
+          trackLength += (startTimeOffset + clip.events[k].duration);
 
           if (startTimeOffset != 0) {
             startTimeOffset = 0;
@@ -133,14 +134,14 @@ export class Performance {
 
     console.log("Creating control change track from " + numberOfWaveforms + " waveforms.");
 
-    var controlChangeNumber = this.GetSeedValue(currentIndex, 1);
+    var controlChangeNumber = this.GetSeedValue(currentIndex, 1) + 1;
     currentIndex++;
 
     for (var i = 0; i < numberOfWaveforms; i++) {
       var waveform = Util.getWavetable(this.GetSeedValue(currentIndex, 1));
       currentIndex++
 
-      var sampleEventInterval = (this.GetSeedValue(currentIndex, 2) + 1) * ticksPerBeat;
+      var sampleEventInterval = Util.map(this.GetSeedValue(currentIndex, 2), 0, 99, 10, 90);
       currentIndex++;
 
       var numberOfLoops = Util.map(this.GetSeedValue(currentIndex, 1), 0, 9, 2, 24);
@@ -150,19 +151,24 @@ export class Performance {
       currentIndex++;
 
       for (var j = 0; j < numberOfLoops; j++) {
+        // Instantly return if we have created enough CC to cover the whole performance.
         if (trackLength > this.performanceLength) {
-          break;
+          return track;
         }
+        var amplitude = (this.GetSeedValue(currentIndex, 1) / 10) + .1;
+        currentIndex++;
+
+        var densityModifier = (this.GetSeedValue(currentIndex, 1) / 10) + .1;
+        currentIndex++;
 
         for (var k = 0; k < waveform.length; k++) {
-          var cc = new Midi.MidiEvent();
           track.addEvent(
-            new Midi.MidiEvent({
-              type: Midi.MidiEvent.CONTROLLER,
+            new Midi.Event({
+              type: 0xB0, // Control change
               channel: startSeedIndex,
               param1: controlChangeNumber,
-              param2: waveform[j] * amplitude,
-              time: sampleEventInterval,
+              param2: waveform[k] * amplitude,
+              time: sampleEventInterval * densityModifier,
             })
           );
 
