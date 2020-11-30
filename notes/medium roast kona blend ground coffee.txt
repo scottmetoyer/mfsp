@@ -1,0 +1,56 @@
+Enter a performance description > medium roast kona blend ground coffee
+Ready for scan > 072323050178
+Creating MIDI track 0 starting at tick 0
+Track constructed from 4 clips at density 8
+Creating MIDI track 1 starting at tick 28672
+Track constructed from 2 clips at density 3
+Creating MIDI track 2 starting at tick 8192
+Track constructed from 2 clips at density 4
+Creating MIDI track 3 starting at tick 12288
+Track constructed from 2 clips at density 3
+Creating MIDI track 4 starting at tick 8192
+Track constructed from 2 clips at density 4
+Creating MIDI track 5 starting at tick 12288
+Track constructed from 1 clips at density 1
+Creating MIDI track 6 starting at tick 0
+Track constructed from 3 clips at density 6
+Creating MIDI track 7 starting at tick 20480
+Track constructed from 1 clips at density 1
+Creating MIDI track 8 starting at tick 0
+Track constructed from 1 clips at density 2
+Creating MIDI track 9 starting at tick 4096
+Track constructed from 4 clips at density 8
+Creating MIDI track 10 starting at tick 28672
+Track constructed from 5 clips at density 9
+Creating MIDI track 11 starting at tick 32768
+Track constructed from 1 clips at density 1
+Creating control change track from 0 waveforms.
+Creating control change track from 7 waveforms.
+Creating control change track from 2 waveforms.
+Creating control change track from 3 waveforms.
+Creating control change track from 2 waveforms.
+Creating control change track from 3 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 5 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 1 waveforms.
+Creating control change track from 7 waveforms.
+Creating control change track from 8 waveforms.
+Description:		medium roast kona blend ground coffee
+Seed:		072323050178
+BPM:		111
+Scale:		E locrian pentatonic
+Pool:		E3,G3,A3,Bb3,D3,E4,G4,A4,Bb4,D4,E5,G5,A5,Bb5,D5
+Voice Clips:
+57(384), 58(256), 57(384), 58(0), 52(640), 64(0), 52(128),
+58(256), 57(384),
+57(384), 58(0), 52(640),
+58(0), 52(640),
+52(640), 64(0), 52(128),
+52(128), 55(896), 69(1024), 70(0), 52(896),
+69(1024),
+70(0), 52(896), 69(256), 57(384), 58(256), 57(384), 58(0),
+52(896), 69(256), 57(384), 58(256), 57(384), 58(0), 52(640), 64(0),
+Performance is 212992 ticks long.
+
+End

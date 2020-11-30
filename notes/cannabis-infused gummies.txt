@@ -1,0 +1,57 @@
+Enter a performance description > cannabis-infused gummies
+Ready for scan > 852873008672
+Creating MIDI track 0 starting at tick 0
+Track constructed from 3 clips at density 6
+Creating MIDI track 1 starting at tick 20480
+Track constructed from 2 clips at density 3
+Creating MIDI track 2 starting at tick 8192
+Track constructed from 5 clips at density 9
+Creating MIDI track 3 starting at tick 32768
+Track constructed from 4 clips at density 8
+Creating MIDI track 4 starting at tick 28672
+Track constructed from 2 clips at density 4
+Creating MIDI track 5 starting at tick 12288
+Track constructed from 1 clips at density 1
+Creating MIDI track 6 starting at tick 0
+Track constructed from 1 clips at density 1
+Creating MIDI track 7 starting at tick 0
+Track constructed from 5 clips at density 9
+Creating MIDI track 8 starting at tick 32768
+Track constructed from 4 clips at density 7
+Creating MIDI track 9 starting at tick 24576
+Track constructed from 4 clips at density 8
+Creating MIDI track 10 starting at tick 28672
+Track constructed from 2 clips at density 3
+Creating MIDI track 11 starting at tick 8192
+Track constructed from 5 clips at density 9
+Creating control change track from 8 waveforms.
+Creating control change track from 5 waveforms.
+Creating control change track from 2 waveforms.
+Creating control change track from 8 waveforms.
+Creating control change track from 7 waveforms.
+Creating control change track from 3 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 8 waveforms.
+Creating control change track from 6 waveforms.
+Creating control change track from 7 waveforms.
+Creating control change track from 2 waveforms.
+Description:		cannabis-infused gummies
+Seed:		852873008672
+BPM:		98
+Scale:		D aeolian
+Pool:		D3,E3,F3,G3,A3,Bb3,C3,D4,E4,F4,G4,A4,Bb4,C4,D5,E5,F5,G5,A5,Bb5,C5
+Voice Clips:
+58(256), 53(1024), 64(896), 62(384), 55(0), 50(0), 50(1024), 64(768),
+53(1024), 64(896), 62(384), 55(0), 50(0),
+64(896), 62(384),
+62(384), 55(0), 50(0), 50(1024), 64(768), 48(896), 62(256), 53(1024),
+55(0), 50(0), 50(1024), 64(768), 48(896), 62(256), 53(1024),
+50(0), 50(1024), 64(768),
+48(896), 62(256), 53(1024), 64(640), 58(256), 53(1024), 64(896), 62(384),
+62(256), 53(1024), 64(640), 58(256), 53(1024), 64(896),
+53(1024), 64(640), 58(256), 53(1024), 64(896), 62(384), 55(0),
+64(640), 58(256),
+Performance is 726912 ticks long.
+
+End

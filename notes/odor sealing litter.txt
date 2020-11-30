@@ -1,0 +1,53 @@
+Enter a performance description > odor sealing litter
+Ready for scan > 033200870005
+Creating MIDI track 0 starting at tick 0
+Track constructed from 2 clips at density 4
+Creating MIDI track 1 starting at tick 12288
+Track constructed from 2 clips at density 4
+Creating MIDI track 2 starting at tick 12288
+Track constructed from 2 clips at density 3
+Creating MIDI track 3 starting at tick 8192
+Track constructed from 1 clips at density 1
+Creating MIDI track 4 starting at tick 0
+Track constructed from 1 clips at density 1
+Creating MIDI track 5 starting at tick 0
+Track constructed from 5 clips at density 9
+Creating MIDI track 6 starting at tick 32768
+Track constructed from 4 clips at density 8
+Creating MIDI track 7 starting at tick 28672
+Track constructed from 1 clips at density 1
+Creating MIDI track 8 starting at tick 0
+Track constructed from 1 clips at density 1
+Creating MIDI track 9 starting at tick 0
+Track constructed from 1 clips at density 1
+Creating MIDI track 10 starting at tick 0
+Track constructed from 3 clips at density 6
+Creating MIDI track 11 starting at tick 20480
+Track constructed from 1 clips at density 1
+Creating control change track from 0 waveforms.
+Creating control change track from 3 waveforms.
+Creating control change track from 3 waveforms.
+Creating control change track from 2 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 8 waveforms.
+Creating control change track from 7 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 5 waveforms.
+Description:		odor sealing litter
+Seed:		033200870005
+BPM:		85
+Scale:		C aeolian
+Pool:		C3,D3,Eb3,F3,G3,Ab3,Bb3,C4,D4,Eb4,F4,G4,Ab4,Bb4,C5,D5,Eb5,F5,G5,Ab5,Bb5
+Voice Clips:
+53(256), 51(0), 48(0),
+51(0), 48(0), 48(1024),
+48(0), 48(1024),
+60(0), 48(0), 48(0), 48(640), 56(0), 48(384), 53(384), 53(256),
+48(0), 48(0), 48(640), 56(0), 48(384), 53(384), 53(256),
+48(384), 53(384), 53(256), 51(0), 48(0),
+Performance is 43008 ticks long.
+
+End

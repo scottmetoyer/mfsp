@@ -1,0 +1,56 @@
+Enter a performance description > 91 percent isopropyl alcohol
+Ready for scan > 072785130401
+Creating MIDI track 0 starting at tick 0
+Track constructed from 4 clips at density 8
+Creating MIDI track 1 starting at tick 28672
+Track constructed from 2 clips at density 3
+Creating MIDI track 2 starting at tick 8192
+Track constructed from 4 clips at density 8
+Creating MIDI track 3 starting at tick 28672
+Track constructed from 5 clips at density 9
+Creating MIDI track 4 starting at tick 32768
+Track constructed from 3 clips at density 6
+Creating MIDI track 5 starting at tick 20480
+Track constructed from 1 clips at density 2
+Creating MIDI track 6 starting at tick 4096
+Track constructed from 2 clips at density 4
+Creating MIDI track 7 starting at tick 12288
+Track constructed from 1 clips at density 1
+Creating MIDI track 8 starting at tick 0
+Track constructed from 3 clips at density 5
+Creating MIDI track 9 starting at tick 16384
+Track constructed from 1 clips at density 1
+Creating MIDI track 10 starting at tick 0
+Track constructed from 1 clips at density 2
+Creating MIDI track 11 starting at tick 4096
+Track constructed from 1 clips at density 1
+Creating control change track from 0 waveforms.
+Creating control change track from 7 waveforms.
+Creating control change track from 2 waveforms.
+Creating control change track from 7 waveforms.
+Creating control change track from 8 waveforms.
+Creating control change track from 5 waveforms.
+Creating control change track from 1 waveforms.
+Creating control change track from 3 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 4 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 1 waveforms.
+Description:		91 percent isopropyl alcohol
+Seed:		072785130401
+BPM:		111
+Scale:		E phrygian
+Pool:		E3,F3,G3,A3,B3,C3,D3,E4,F4,G4,A4,B4,C4,D4,E5,F5,G5,A5,B5,C5,D5
+Voice Clips:
+55(896), 64(1024), 65(640), 48(128), 53(384), 57(0), 52(512),
+64(1024), 65(640),
+65(640), 48(128), 53(384), 57(0), 52(512), 59(0), 52(128),
+48(128), 53(384), 57(0), 52(512), 59(0), 52(128), 53(0), 52(896),
+53(384), 57(0), 52(512), 59(0), 52(128),
+57(0),
+52(512), 59(0), 52(128),
+52(128), 53(0), 52(896), 64(256),
+52(896),
+Performance is 263680 ticks long.
+
+End

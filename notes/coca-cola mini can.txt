@@ -1,0 +1,53 @@
+Enter a performance description > coca-cola mini can
+Ready for scan > 049000061017
+Creating MIDI track 0 starting at tick 0
+Track constructed from 3 clips at density 5
+Creating MIDI track 1 starting at tick 16384
+Track constructed from 6 clips at density 10
+Creating MIDI track 2 starting at tick 36864
+Track constructed from 1 clips at density 1
+Creating MIDI track 3 starting at tick 0
+Track constructed from 1 clips at density 1
+Creating MIDI track 4 starting at tick 0
+Track constructed from 1 clips at density 1
+Creating MIDI track 5 starting at tick 0
+Track constructed from 1 clips at density 1
+Creating MIDI track 6 starting at tick 0
+Track constructed from 4 clips at density 7
+Creating MIDI track 7 starting at tick 24576
+Track constructed from 1 clips at density 2
+Creating MIDI track 8 starting at tick 4096
+Track constructed from 1 clips at density 1
+Creating MIDI track 9 starting at tick 0
+Track constructed from 1 clips at density 2
+Creating MIDI track 10 starting at tick 4096
+Track constructed from 4 clips at density 8
+Creating MIDI track 11 starting at tick 28672
+Track constructed from 1 clips at density 1
+Creating control change track from 0 waveforms.
+Creating control change track from 4 waveforms.
+Creating control change track from 9 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 6 waveforms.
+Creating control change track from 1 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 1 waveforms.
+Creating control change track from 7 waveforms.
+Description:		coca-cola mini can
+Seed:		049000061017
+BPM:		96
+Scale:		C dorian
+Pool:		C3,D3,Eb3,F3,G3,A3,Bb3,C4,D4,Eb4,F4,G4,A4,Bb4,C5,D5,Eb5,F5,G5,A5,Bb5
+Voice Clips:
+63(0), 48(0), 48(0), 48(0),
+48(0), 48(0), 48(0), 48(768), 58(128), 50(0), 48(128), 50(896), 60(0),
+50(0), 48(128), 50(896), 60(0), 48(512), 55(1152),
+48(128),
+60(0),
+48(512), 55(1152), 63(0), 48(0), 48(0), 48(0), 48(768),
+Performance is 197632 ticks long.
+
+End

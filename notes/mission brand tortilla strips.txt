@@ -1,0 +1,56 @@
+Enter a performance description > mission brand tortilla strips
+Ready for scan > 073731081037
+Creating MIDI track 0 starting at tick 0
+Track constructed from 4 clips at density 8
+Creating MIDI track 1 starting at tick 28672
+Track constructed from 2 clips at density 4
+Creating MIDI track 2 starting at tick 12288
+Track constructed from 4 clips at density 8
+Creating MIDI track 3 starting at tick 28672
+Track constructed from 2 clips at density 4
+Creating MIDI track 4 starting at tick 12288
+Track constructed from 1 clips at density 2
+Creating MIDI track 5 starting at tick 4096
+Track constructed from 1 clips at density 1
+Creating MIDI track 6 starting at tick 0
+Track constructed from 5 clips at density 9
+Creating MIDI track 7 starting at tick 32768
+Track constructed from 1 clips at density 2
+Creating MIDI track 8 starting at tick 4096
+Track constructed from 1 clips at density 1
+Creating MIDI track 9 starting at tick 0
+Track constructed from 2 clips at density 4
+Creating MIDI track 10 starting at tick 12288
+Track constructed from 4 clips at density 8
+Creating MIDI track 11 starting at tick 28672
+Track constructed from 1 clips at density 1
+Creating control change track from 0 waveforms.
+Creating control change track from 7 waveforms.
+Creating control change track from 3 waveforms.
+Creating control change track from 7 waveforms.
+Creating control change track from 3 waveforms.
+Creating control change track from 1 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 8 waveforms.
+Creating control change track from 1 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 3 waveforms.
+Creating control change track from 7 waveforms.
+Description:		mission brand tortilla strips
+Seed:		073731081037
+BPM:		112
+Scale:		F phrygian
+Pool:		F3,Gb3,Ab3,Bb3,C3,Db3,Eb3,F4,Gb4,Ab4,Bb4,C4,Db4,Eb4,F5,Gb5,Ab5,Bb5,C5,Db5,Eb5
+Voice Clips:
+58(896), 65(384), 58(128), 54(0), 53(1024), 66(128), 54(0),
+65(384), 58(128), 54(0),
+58(128), 54(0), 53(1024), 66(128), 54(0), 53(384), 58(896),
+54(0), 53(1024), 66(128),
+53(1024),
+54(0), 53(384), 58(896), 65(0), 53(896), 65(384), 58(896), 65(384),
+53(384),
+65(0), 53(896), 65(384),
+53(896), 65(384), 58(896), 65(384), 58(128), 54(0), 53(1024),
+Performance is 391680 ticks long.
+
+End

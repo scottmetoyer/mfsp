@@ -1,0 +1,55 @@
+Enter a performance description > pepto bismol 4oz bottle
+Ready for scan > 301490039304
+Creating MIDI track 0 starting at tick 0
+Track constructed from 1 clips at density 1
+Creating MIDI track 1 starting at tick 0
+Track constructed from 1 clips at density 2
+Creating MIDI track 2 starting at tick 4096
+Track constructed from 3 clips at density 5
+Creating MIDI track 3 starting at tick 16384
+Track constructed from 6 clips at density 10
+Creating MIDI track 4 starting at tick 36864
+Track constructed from 1 clips at density 1
+Creating MIDI track 5 starting at tick 0
+Track constructed from 1 clips at density 1
+Creating MIDI track 6 starting at tick 0
+Track constructed from 2 clips at density 4
+Creating MIDI track 7 starting at tick 12288
+Track constructed from 6 clips at density 10
+Creating MIDI track 8 starting at tick 36864
+Track constructed from 2 clips at density 4
+Creating MIDI track 9 starting at tick 12288
+Track constructed from 1 clips at density 1
+Creating MIDI track 10 starting at tick 0
+Track constructed from 3 clips at density 5
+Creating MIDI track 11 starting at tick 16384
+Track constructed from 2 clips at density 4
+Creating control change track from 3 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 1 waveforms.
+Creating control change track from 4 waveforms.
+Creating control change track from 9 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 3 waveforms.
+Creating control change track from 9 waveforms.
+Creating control change track from 3 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 4 waveforms.
+Description:		pepto bismol 4oz bottle
+Seed:		301490039304
+BPM:		63
+Scale:		F minor pentatonic
+Pool:		F3,Ab3,Bb3,C3,Eb3,F4,Ab4,Bb4,C4,Eb4,F5,Ab5,Bb5,C5,Eb5
+Voice Clips:
+53(128), 56(512), 51(1152),
+51(1152),
+63(0), 53(0), 53(384), 48(1152),
+53(0), 53(384), 48(1152), 63(384), 48(0), 53(512), 51(384), 48(0), 53(128),
+63(384), 48(0), 53(512),
+48(0), 53(512), 51(384), 48(0), 53(128), 56(512), 51(1152), 63(0), 53(0),
+53(512), 51(384), 48(0),
+48(0), 53(128), 56(512), 51(1152),
+Performance is 333824 ticks long.
+
+End

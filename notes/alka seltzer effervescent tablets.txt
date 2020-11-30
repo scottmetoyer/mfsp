@@ -1,0 +1,56 @@
+Enter a performance description > alka seltzer effervescent tablets
+Ready for scan > 016500564188
+Creating MIDI track 0 starting at tick 0
+Track constructed from 1 clips at density 2
+Creating MIDI track 1 starting at tick 4096
+Track constructed from 4 clips at density 7
+Creating MIDI track 2 starting at tick 24576
+Track constructed from 3 clips at density 6
+Creating MIDI track 3 starting at tick 20480
+Track constructed from 1 clips at density 1
+Creating MIDI track 4 starting at tick 0
+Track constructed from 1 clips at density 1
+Creating MIDI track 5 starting at tick 0
+Track constructed from 3 clips at density 6
+Creating MIDI track 6 starting at tick 20480
+Track constructed from 4 clips at density 7
+Creating MIDI track 7 starting at tick 24576
+Track constructed from 3 clips at density 5
+Creating MIDI track 8 starting at tick 16384
+Track constructed from 1 clips at density 2
+Creating MIDI track 9 starting at tick 4096
+Track constructed from 5 clips at density 9
+Creating MIDI track 10 starting at tick 32768
+Track constructed from 5 clips at density 9
+Creating MIDI track 11 starting at tick 32768
+Track constructed from 1 clips at density 1
+Creating control change track from 0 waveforms.
+Creating control change track from 1 waveforms.
+Creating control change track from 6 waveforms.
+Creating control change track from 5 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 5 waveforms.
+Creating control change track from 6 waveforms.
+Creating control change track from 4 waveforms.
+Creating control change track from 1 waveforms.
+Creating control change track from 8 waveforms.
+Creating control change track from 8 waveforms.
+Description:		alka seltzer effervescent tablets
+Seed:		016500564188
+BPM:		73
+Scale:		C minor hexatonic
+Pool:		C3,D3,Eb3,F3,G3,B3,C4,D4,Eb4,F4,G4,B4,C5,D5,Eb5,F5,G5,B5
+Voice Clips:
+60(640),
+59(0), 48(0), 48(640), 59(768), 60(512), 55(128),
+48(0), 48(640), 59(768), 60(512), 55(128),
+60(512), 55(128), 50(1024), 63(1024), 63(0),
+55(128), 50(1024), 63(1024), 63(0), 48(128), 50(768),
+50(1024), 63(1024), 63(0), 48(128),
+63(1024),
+63(0), 48(128), 50(768), 60(640), 59(0), 48(0), 48(640), 59(768),
+48(128), 50(768), 60(640), 59(0), 48(0), 48(640), 59(768), 60(512),
+Performance is 240000 ticks long.
+
+End

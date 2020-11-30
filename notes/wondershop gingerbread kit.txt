@@ -1,0 +1,57 @@
+Enter a performance description > wondershop gingerbread kit
+Ready for scan > 085239054772
+Creating MIDI track 0 starting at tick 0
+Track constructed from 5 clips at density 9
+Creating MIDI track 1 starting at tick 32768
+Track constructed from 3 clips at density 6
+Creating MIDI track 2 starting at tick 20480
+Track constructed from 2 clips at density 3
+Creating MIDI track 3 starting at tick 8192
+Track constructed from 2 clips at density 4
+Creating MIDI track 4 starting at tick 12288
+Track constructed from 6 clips at density 10
+Creating MIDI track 5 starting at tick 36864
+Track constructed from 1 clips at density 1
+Creating MIDI track 6 starting at tick 0
+Track constructed from 3 clips at density 6
+Creating MIDI track 7 starting at tick 20480
+Track constructed from 3 clips at density 5
+Creating MIDI track 8 starting at tick 16384
+Track constructed from 4 clips at density 8
+Creating MIDI track 9 starting at tick 28672
+Track constructed from 4 clips at density 8
+Creating MIDI track 10 starting at tick 28672
+Track constructed from 2 clips at density 3
+Creating MIDI track 11 starting at tick 8192
+Track constructed from 1 clips at density 1
+Creating control change track from 0 waveforms.
+Creating control change track from 8 waveforms.
+Creating control change track from 5 waveforms.
+Creating control change track from 2 waveforms.
+Creating control change track from 3 waveforms.
+Creating control change track from 9 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 5 waveforms.
+Creating control change track from 4 waveforms.
+Creating control change track from 7 waveforms.
+Creating control change track from 7 waveforms.
+Creating control change track from 2 waveforms.
+Description:		wondershop gingerbread kit
+Seed:		085239054772
+BPM:		120
+Scale:		F aeolian
+Pool:		F3,G3,Ab3,Bb3,C3,Db3,Eb3,F4,G4,Ab4,Bb4,C4,Db4,Eb4,F5,G5,Ab5,Bb5,C5,Db5,Eb5
+Voice Clips:
+49(256), 56(384), 58(1152), 68(0), 53(640), 49(512), 48(896), 65(896),
+56(384), 58(1152), 68(0), 53(640), 49(512),
+58(1152), 68(0),
+68(0), 53(640), 49(512),
+53(640), 49(512), 48(896), 65(896), 65(256), 56(0), 53(1024), 67(640), 49(256),
+48(896), 65(896), 65(256), 56(0), 53(1024),
+65(896), 65(256), 56(0), 53(1024),
+65(256), 56(0), 53(1024), 67(640), 49(256), 56(384), 58(1152),
+56(0), 53(1024), 67(640), 49(256), 56(384), 58(1152), 68(0),
+53(1024), 67(640),
+Performance is 1064448 ticks long.
+
+End

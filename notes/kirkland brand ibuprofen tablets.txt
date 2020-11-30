@@ -1,0 +1,57 @@
+Enter a performance description > kirlkand brand ibuprofen tablets
+Ready for scan > 096619621590
+Creating MIDI track 0 starting at tick 0
+Track constructed from 6 clips at density 10
+Creating MIDI track 1 starting at tick 36864
+Track constructed from 4 clips at density 7
+Creating MIDI track 2 starting at tick 24576
+Track constructed from 4 clips at density 7
+Creating MIDI track 3 starting at tick 24576
+Track constructed from 1 clips at density 2
+Creating MIDI track 4 starting at tick 4096
+Track constructed from 6 clips at density 10
+Creating MIDI track 5 starting at tick 36864
+Track constructed from 4 clips at density 7
+Creating MIDI track 6 starting at tick 24576
+Track constructed from 2 clips at density 3
+Creating MIDI track 7 starting at tick 8192
+Track constructed from 1 clips at density 2
+Creating MIDI track 8 starting at tick 4096
+Track constructed from 3 clips at density 6
+Creating MIDI track 9 starting at tick 20480
+Track constructed from 6 clips at density 10
+Creating MIDI track 10 starting at tick 36864
+Track constructed from 1 clips at density 1
+Creating MIDI track 11 starting at tick 0
+Track constructed from 1 clips at density 1
+Creating control change track from 0 waveforms.
+Creating control change track from 9 waveforms.
+Creating control change track from 6 waveforms.
+Creating control change track from 6 waveforms.
+Creating control change track from 1 waveforms.
+Creating control change track from 9 waveforms.
+Creating control change track from 6 waveforms.
+Creating control change track from 2 waveforms.
+Creating control change track from 1 waveforms.
+Creating control change track from 5 waveforms.
+Creating control change track from 9 waveforms.
+Creating control change track from 0 waveforms.
+Description:		kirlkand brand ibuprofen tablets
+Seed:		096619621590
+BPM:		127
+Scale:		D dorian
+Pool:		D3,E3,F3,G3,A3,B3,C3,D4,E4,F4,G4,A4,B4,C4,D5,E5,F5,G5,A5,B5,C5
+Voice Clips:
+48(768), 48(128), 52(1152), 65(768), 48(256), 53(128), 52(640), 59(1152), 65(0),
+48(128), 52(1152), 65(768), 48(256), 53(128), 52(640),
+52(1152), 65(768), 48(256), 53(128), 52(640), 59(1152),
+65(768),
+48(256), 53(128), 52(640), 59(1152), 65(0), 50(0), 50(1152), 65(768), 48(768),
+53(128), 52(640), 59(1152), 65(0), 50(0), 50(1152),
+52(640), 59(1152),
+59(1152),
+65(0), 50(0), 50(1152), 65(768), 48(768),
+50(0), 50(1152), 65(768), 48(768), 48(128), 52(1152), 65(768), 48(256), 53(128),
+Performance is 1178880 ticks long.
+
+End

@@ -1,0 +1,42 @@
+Enter a performance description > gardena fragranced candle
+Ready for scan > 24404235
+Creating MIDI track 0 starting at tick 0
+Track constructed from 3 clips at density 5
+Creating MIDI track 1 starting at tick 16384
+Track constructed from 3 clips at density 5
+Creating MIDI track 2 starting at tick 16384
+Track constructed from 1 clips at density 1
+Creating MIDI track 3 starting at tick 0
+Track constructed from 3 clips at density 5
+Creating MIDI track 4 starting at tick 16384
+Track constructed from 2 clips at density 3
+Creating MIDI track 5 starting at tick 8192
+Track constructed from 2 clips at density 4
+Creating MIDI track 6 starting at tick 12288
+Track constructed from 3 clips at density 6
+Creating MIDI track 7 starting at tick 20480
+Track constructed from 2 clips at density 3
+Creating control change track from 2 waveforms.
+Creating control change track from 4 waveforms.
+Creating control change track from 4 waveforms.
+Creating control change track from 0 waveforms.
+Creating control change track from 4 waveforms.
+Creating control change track from 2 waveforms.
+Creating control change track from 3 waveforms.
+Creating control change track from 5 waveforms.
+Description:		gardena fragranced candle
+Seed:		24404235
+BPM:		92
+Scale:		F# dorian
+Pool:		F#3,G#3,A3,B3,C#3,D#3,E3,F#4,G#4,A4,B4,C#4,D#4,E4,F#5,G#5,A5,B5,C#5,D#5,E5
+Voice Clips:
+49(512), 49(0),
+49(0), 54(512), 49(256), 57(384),
+54(512), 49(256), 57(384), 59(640),
+57(384), 59(640), 51(256), 57(512),
+59(640), 51(256),
+51(256), 57(512), 49(512),
+57(512), 49(512), 49(0), 54(512), 49(256),
+Performance is 82944 ticks long.
+
+End
